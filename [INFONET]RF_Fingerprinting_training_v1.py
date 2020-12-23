@@ -117,8 +117,8 @@ for zzz in range(Avg_times):
         # ## For version 1, Define your own classifier models
         # ##
 
-        # model_version = 'CNN'
-        # # model = CNN_workshop().to(device)
+        model_version = 'CNN'
+        model = CNN_workshop().to(device)
         # model = CNN_workshop_SS().to(device)
 
         ##
@@ -130,17 +130,17 @@ for zzz in range(Avg_times):
         ## URL : https://pytorch.org/hub/pytorch_vision_googlenet/
         ##
 
-        model_version = 'GoogLeNet'
-        model = torch.hub.load('pytorch/vision:v0.6.0', 'googlenet', pretrained=True).to(device)
-        model.transform_input = False
-
-        num_out_chs = model.conv1.conv.out_channels
-        model.conv1.conv = nn.Conv2d(1, num_out_chs, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
-
-        num_ftrs = model.fc.in_features
-        model.fc = nn.Linear(num_ftrs,8,bias=True)
-
-        model = model.to(device)
+        # model_version = 'GoogLeNet'
+        # model = torch.hub.load('pytorch/vision:v0.6.0', 'googlenet', pretrained=True).to(device)
+        # model.transform_input = False
+        #
+        # num_out_chs = model.conv1.conv.out_channels
+        # model.conv1.conv = nn.Conv2d(1, num_out_chs, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+        #
+        # num_ftrs = model.fc.in_features
+        # model.fc = nn.Linear(num_ftrs,8,bias=True)
+        #
+        # model = model.to(device)
 
         ##
         ## Define your Loss functionwith optimizer & scheduler 
@@ -181,9 +181,9 @@ for zzz in range(Avg_times):
                 else:
                     inputs_sig = inputs_raw_real.numpy() + 1j * imputs_raw_image.numpy()
                                 
-                # features_sig, features_spectrum, _ , _ = Extractors.RTextraction(inputs_sig)
+                features_sig, features_spectrum, _ , _ = Extractors.RTextraction(inputs_sig)
 
-                features_sig, features_spectrum, _ , _ = Extractors.SSextraction(inputs_sig)
+                # features_sig, features_spectrum, _ , _ = Extractors.SSextraction(inputs_sig)
 
 
                 tmp = np.reshape(features_spectrum,
