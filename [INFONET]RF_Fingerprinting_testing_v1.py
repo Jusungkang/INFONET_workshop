@@ -98,8 +98,8 @@ for zzz in range(Avg_times):
         # ## Phase 1-1 에서 학습 및 저장된 model 을 불러오는 과정.
         # ##
 
-        # model_version = 'CNN'
-        # # new_model = CNN_workshop().to(device)
+        model_version = 'CNN'
+        new_model = CNN_workshop().to(device)
         # new_model = CNN_workshop_SS().to(device)
 
         ##
@@ -111,17 +111,17 @@ for zzz in range(Avg_times):
         ## URL : https://pytorch.org/hub/pytorch_vision_googlenet/
         ##
 
-        model_version = 'GoogLeNet'
-        new_model = torch.hub.load('pytorch/vision:v0.6.0', 'googlenet', pretrained=True).to(device)
-        new_model.transform_input = False
-
-        num_out_chs = new_model.conv1.conv.out_channels
-        new_model.conv1.conv = nn.Conv2d(1, num_out_chs, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
-
-        num_ftrs = new_model.fc.in_features
-        new_model.fc = nn.Linear(num_ftrs,8,bias=True)
-
-        new_model = new_model.to(device)
+        # model_version = 'GoogLeNet'
+        # new_model = torch.hub.load('pytorch/vision:v0.6.0', 'googlenet', pretrained=True).to(device)
+        # new_model.transform_input = False
+        #
+        # num_out_chs = new_model.conv1.conv.out_channels
+        # new_model.conv1.conv = nn.Conv2d(1, num_out_chs, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+        #
+        # num_ftrs = new_model.fc.in_features
+        # new_model.fc = nn.Linear(num_ftrs,8,bias=True)
+        #
+        # new_model = new_model.to(device)
 
 
         ##
@@ -161,9 +161,9 @@ for zzz in range(Avg_times):
                 else:
                     inputs_sig_test = inputs_raw_real.numpy() + 1j * imputs_raw_image.numpy()
 
-                # _ , features_spectrum, features_time, features_spectrum_time = Extractors.RTextraction(inputs_sig_test)
+                _ , features_spectrum, features_time, features_spectrum_time = Extractors.RTextraction(inputs_sig_test)
 
-                _ , features_spectrum, features_time, features_spectrum_time = Extractors.SSextraction(inputs_sig_test)
+                # _ , features_spectrum, features_time, features_spectrum_time = Extractors.SSextraction(inputs_sig_test)
 
                 tmp = np.reshape(features_spectrum,
                                  (
